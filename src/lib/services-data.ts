@@ -1,6 +1,7 @@
 import {
   Stethoscope, HeartPulse, FlaskConical, Syringe, Bandage,
   Activity, Ambulance, Scan, UserRound, Users, Pill, HandHeart,
+  Plane, Globe2,
 } from "lucide-react";
 
 export const services = [
@@ -16,4 +17,6 @@ export const services = [
   { icon: Syringe, title: "Injections", description: "IV, IM and subcutaneous injections administered safely at home." },
   { icon: Bandage, title: "Dressing Care", description: "Sterile wound dressing and ulcer care by trained professionals." },
   { icon: Scan, title: "X-ray @ Home", description: "Portable X-ray imaging at your home with quick reporting." },
+  { icon: Globe2, title: "NRI Medical Tourism", description: "End-to-end medical tourism support for NRIs — hospital tie-ups, appointments, stay, transport and post-treatment home care." },
+  { icon: Plane, title: "Patient Transfer (Train / Air)", description: "Safe long-distance transfer of sick patients via train or airways with trained medical escorts and equipment." },
 ] as const;
