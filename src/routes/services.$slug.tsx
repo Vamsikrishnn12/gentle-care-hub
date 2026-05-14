@@ -68,7 +68,7 @@ function ServiceDetail() {
           <div className="animate-fade-up">
             <h2 className="font-display text-2xl">What's included</h2>
             <ul className="mt-5 grid sm:grid-cols-2 gap-3">
-              {service.highlights.map((h) => (
+              {service.highlights.map((h: string) => (
                 <li key={h} className="flex items-start gap-2 rounded-xl border border-border/60 bg-card p-4">
                   <CheckCircle2 className="h-5 w-5 text-leaf shrink-0 mt-0.5" />
                   <span className="text-sm">{h}</span>
@@ -81,7 +81,7 @@ function ServiceDetail() {
           <div className="animate-fade-up">
             <h2 className="font-display text-2xl">How it works</h2>
             <ol className="mt-5 space-y-4">
-              {service.process.map((p, i) => (
+              {service.process.map((p: { step: string; detail: string }, i: number) => (
                 <li key={p.step} className="flex gap-4 rounded-xl border border-border/60 bg-card p-5">
                   <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-brand text-white text-sm font-semibold flex items-center justify-center">
                     {i + 1}
@@ -99,7 +99,7 @@ function ServiceDetail() {
           <div className="animate-fade-up">
             <h2 className="font-display text-2xl">Frequently asked</h2>
             <div className="mt-5 space-y-3">
-              {service.faqs.map((f) => (
+              {service.faqs.map((f: { q: string; a: string }) => (
                 <details key={f.q} className="group rounded-xl border border-border/60 bg-card p-5 open:shadow-card transition">
                   <summary className="cursor-pointer font-medium list-none flex justify-between items-center">
                     {f.q}
