@@ -1,5 +1,13 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, CheckCircle2, Phone, ChevronRight } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  ChevronRight,
+  ClipboardList,
+  HeartHandshake,
+  Phone,
+  ShieldCheck,
+} from "lucide-react";
 import { getService, services, type Service } from "@/lib/services-data";
 
 export const Route = createFileRoute("/services/$slug")({
@@ -11,9 +19,9 @@ export const Route = createFileRoute("/services/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.service.title} — Care Touch Nursing` },
+          { title: `${loaderData.service.title} - Care Touch Nursing` },
           { name: "description", content: loaderData.service.description },
-          { property: "og:title", content: `${loaderData.service.title} — Care Touch Nursing` },
+          { property: "og:title", content: `${loaderData.service.title} - Care Touch Nursing` },
           { property: "og:description", content: loaderData.service.description },
         ]
       : [],
@@ -34,7 +42,6 @@ function ServiceDetail() {
 
   return (
     <>
-      {/* Hero */}
       <section className="bg-gradient-hero">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <nav className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -44,13 +51,31 @@ function ServiceDetail() {
             <ChevronRight className="h-3 w-3" />
             <span className="text-foreground/80">{service.title}</span>
           </nav>
-          <div className="mt-6 grid lg:grid-cols-[auto_1fr] gap-6 items-center animate-fade-up">
-            <div className="h-20 w-20 rounded-2xl bg-white shadow-card flex items-center justify-center text-brand-deep">
-              <Icon className="h-10 w-10" />
-            </div>
+
+          <div className="mt-6 grid lg:grid-cols-2 gap-10 items-center animate-fade-up">
             <div>
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl">{service.title}</h1>
+              <div className="h-20 w-20 rounded-2xl bg-white shadow-card flex items-center justify-center text-brand-deep">
+                <Icon className="h-10 w-10" />
+              </div>
+              <h1 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl">{service.title}</h1>
               <p className="mt-3 text-lg text-muted-foreground max-w-2xl">{service.tagline}</p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {service.outcomes.slice(0, 2).map((outcome) => (
+                  <span key={outcome} className="rounded-full bg-white/80 border border-border px-4 py-2 text-xs font-medium text-brand-deep">
+                    {outcome}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-3xl shadow-soft">
+              <img
+                src={service.image}
+                alt={service.imageAlt}
+                width={1200}
+                height={800}
+                className="h-full min-h-[280px] w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
             </div>
           </div>
         </div>
@@ -58,17 +83,50 @@ function ServiceDetail() {
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 grid lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2 space-y-12">
-          {/* Overview */}
           <div className="animate-fade-up">
-            <h2 className="font-display text-2xl">Overview</h2>
-            <p className="mt-3 text-muted-foreground leading-relaxed">{service.description}</p>
+            <h2 className="font-display text-2xl">Service overview</h2>
+            <div className="mt-3 space-y-4 text-muted-foreground leading-relaxed">
+              {service.longDescription.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </div>
 
-          {/* Highlights */}
+          <div className="grid md:grid-cols-2 gap-5 animate-fade-up">
+            <div className="rounded-2xl border border-border/60 bg-card p-6">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-soft text-brand-deep">
+                <HeartHandshake className="h-5 w-5" />
+              </div>
+              <h2 className="mt-4 font-display text-2xl">Best for</h2>
+              <ul className="mt-4 space-y-3">
+                {service.bestFor.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-leaf" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-border/60 bg-card p-6">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-soft text-brand-deep">
+                <ShieldCheck className="h-5 w-5" />
+              </div>
+              <h2 className="mt-4 font-display text-2xl">Why families choose it</h2>
+              <ul className="mt-4 space-y-3">
+                {service.outcomes.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-leaf" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
           <div className="animate-fade-up">
             <h2 className="font-display text-2xl">What's included</h2>
             <ul className="mt-5 grid sm:grid-cols-2 gap-3">
-              {service.highlights.map((h: string) => (
+              {service.includedDetails.map((h: string) => (
                 <li key={h} className="flex items-start gap-2 rounded-xl border border-border/60 bg-card p-4">
                   <CheckCircle2 className="h-5 w-5 text-leaf shrink-0 mt-0.5" />
                   <span className="text-sm">{h}</span>
@@ -77,7 +135,39 @@ function ServiceDetail() {
             </ul>
           </div>
 
-          {/* Process */}
+          <div className="animate-fade-up">
+            <h2 className="font-display text-2xl">Care focus areas</h2>
+            <p className="mt-3 text-muted-foreground leading-relaxed">
+              This service is planned around the patient's condition, comfort level and family expectations. Our coordinator explains the visit clearly before booking, so you know what support will be provided and how it helps at home.
+            </p>
+            <div className="mt-5 grid sm:grid-cols-2 gap-3">
+              {service.highlights.map((item) => (
+                <div key={item} className="rounded-xl border border-border/60 bg-card p-4">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-leaf" />
+                    <p className="text-sm font-medium text-foreground">{item}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="animate-fade-up rounded-2xl border border-brand/20 bg-brand-soft/40 p-6">
+            <div className="flex items-center gap-3">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white text-brand-deep shadow-card">
+                <ClipboardList className="h-5 w-5" />
+              </div>
+              <h2 className="font-display text-2xl">Keep ready before the visit</h2>
+            </div>
+            <ul className="mt-5 grid sm:grid-cols-3 gap-3">
+              {service.prepare.map((item) => (
+                <li key={item} className="rounded-xl bg-white/80 border border-border/60 p-4 text-sm text-muted-foreground">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className="animate-fade-up">
             <h2 className="font-display text-2xl">How it works</h2>
             <ol className="mt-5 space-y-4">
@@ -95,7 +185,6 @@ function ServiceDetail() {
             </ol>
           </div>
 
-          {/* FAQs */}
           <div className="animate-fade-up">
             <h2 className="font-display text-2xl">Frequently asked</h2>
             <div className="mt-5 space-y-3">
@@ -112,7 +201,6 @@ function ServiceDetail() {
           </div>
         </div>
 
-        {/* Sidebar */}
         <aside className="space-y-6 lg:sticky lg:top-24 self-start">
           <div className="rounded-2xl bg-gradient-brand text-white p-6 shadow-soft">
             <h3 className="font-display text-xl">Book this service</h3>
@@ -124,14 +212,24 @@ function ServiceDetail() {
               Send a message
             </Link>
           </div>
+          <div className="overflow-hidden rounded-2xl border border-border/60 bg-card">
+            <img src={service.image} alt={service.imageAlt} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+            <div className="p-5">
+              <h3 className="font-semibold">Care built around your home</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                We plan the visit around the patient's comfort, family instructions and doctor advice.
+              </p>
+            </div>
+          </div>
           <div className="rounded-2xl border border-border/60 bg-card p-6">
             <h3 className="font-semibold">Related services</h3>
-            <ul className="mt-3 space-y-2 text-sm">
+            <ul className="mt-4 space-y-3 text-sm">
               {related.map((r) => (
                 <li key={r.slug}>
-                  <Link to="/services/$slug" params={{ slug: r.slug }} className="flex items-center justify-between py-1 hover:text-brand">
-                    <span>{r.title}</span>
-                    <ChevronRight className="h-4 w-4" />
+                  <Link to={`/services/${r.slug}`} className="group flex items-center gap-3 rounded-xl border border-border/60 p-2 hover:border-brand/40 hover:bg-brand-soft/30 transition">
+                    <img src={r.image} alt={r.imageAlt} loading="lazy" className="h-14 w-16 rounded-lg object-cover" />
+                    <span className="min-w-0 flex-1 font-medium group-hover:text-brand">{r.title}</span>
+                    <ChevronRight className="h-4 w-4 shrink-0 text-brand" />
                   </Link>
                 </li>
               ))}

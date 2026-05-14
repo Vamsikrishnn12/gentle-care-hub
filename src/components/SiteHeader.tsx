@@ -14,13 +14,9 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-3">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Care Touch Nursing logo" className="h-10 w-10 rounded-lg object-cover" />
-          <div className="leading-tight">
-            <div className="font-display text-base font-semibold text-brand-deep">Care Touch</div>
-            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Nursing & Home Care</div>
-          </div>
+          <img src={logo} alt="Care Touch Nursing logo" className="h-20 w-auto object-contain" />
         </Link>
         <nav className="hidden md:flex items-center gap-7">
           {nav.map((n) => (
