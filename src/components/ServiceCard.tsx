@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 export function ServiceCard({
   icon: Icon,
   title,
-  description,
   slug,
   image,
   imageAlt,
@@ -13,7 +12,6 @@ export function ServiceCard({
 }: {
   icon: LucideIcon;
   title: string;
-  description: string;
   slug: string;
   image?: string;
   imageAlt?: string;
@@ -45,7 +43,6 @@ export function ServiceCard({
       )}
       <div className="p-6">
         <h3 className="font-display text-lg text-foreground">{title}</h3>
-        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{description}</p>
         <span className="mt-4 inline-flex items-center gap-1 rounded-full bg-brand-soft px-4 py-2 text-sm font-semibold text-brand-deep group-hover:bg-gradient-brand group-hover:text-white transition">
           Learn more <ArrowRight className="h-4 w-4" />
         </span>

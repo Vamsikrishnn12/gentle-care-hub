@@ -10,7 +10,7 @@ export function SiteFooter() {
           <p className="mt-3 text-sm text-muted-foreground max-w-sm">
             Trusted home healthcare in Vellore — nurses, caregivers and doctors at your doorstep.
           </p>
-          <p className="mt-3 text-xs text-muted-foreground">Proprietor: Jayakumar</p>
+          <p className="mt-3 text-xs text-muted-foreground">Proprietor: Dr. Lavanya, PT.D.NDT</p>
         </div>
         <div>
           <h4 className="font-semibold text-sm uppercase tracking-wider text-brand-deep">Quick Links</h4>
