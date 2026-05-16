@@ -206,7 +206,7 @@ function ServiceDetail() {
             <h3 className="font-display text-xl">Book this service</h3>
             <p className="mt-2 text-sm text-white/90">Talk to our coordinator and we'll arrange care quickly.</p>
             <a href="tel:8825500905" className="mt-4 inline-flex items-center gap-2 rounded-full bg-white text-brand-deep px-5 py-2.5 text-sm font-semibold hover:bg-white/90 transition">
-              <Phone className="h-4 w-4" /> 88255 00905
+              <Phone className="h-4 w-4" /> 88255 00905 / 94427 56140
             </a>
             <Link to="/contact" className="mt-2 block text-center rounded-full bg-white/10 border border-white/30 text-white px-5 py-2.5 text-sm font-semibold hover:bg-white/20 transition">
               Send a message

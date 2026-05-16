@@ -1,16 +1,19 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin } from "lucide-react";
+import logo from "@/assets/ctn-logo.png";
 
 export function SiteFooter() {
   return (
     <footer className="mt-24 bg-brand-soft/40 border-t border-border/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid gap-10 md:grid-cols-3">
         <div>
-          <h3 className="font-display text-xl text-brand-deep">Care Touch Nursing & Home Care Agency</h3>
+          <img src={logo} alt="Care Touch Nursing logo" className="h-24 w-auto object-contain" />
           <p className="mt-3 text-sm text-muted-foreground max-w-sm">
             Trusted home healthcare in Vellore — nurses, caregivers and doctors at your doorstep.
           </p>
-          <p className="mt-3 text-xs text-muted-foreground">Proprietor: Dr. Lavanya, PT.D.NDT</p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Proprietor <span className="font-semibold text-foreground">DR. Lavanya.. PT.D.NDT</span>
+          </p>
         </div>
         <div>
           <h4 className="font-semibold text-sm uppercase tracking-wider text-brand-deep">Quick Links</h4>
@@ -26,7 +29,7 @@ export function SiteFooter() {
           <ul className="mt-3 space-y-2 text-sm">
             <li className="flex items-start gap-2"><Phone className="h-4 w-4 mt-0.5 text-brand" /> 88255 00905 / 94427 56140</li>
             <li className="flex items-start gap-2"><Mail className="h-4 w-4 mt-0.5 text-brand" /> caretouchnursinghomecare@gmail.com</li>
-            <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-brand" /> KR Complex (1st Floor), Vallimalai Road, Katpadi, Vellore - 7</li>
+            <li className="flex items-start gap-2"><MapPin className="h-5 w-5 mt-0.5 shrink-0 text-brand" /> No 91, KR Complex, Vallimalai Rd, opposite to vinayagar temple, Kumarappan Nagar, KRS Nagar, Katpadi, Vellore, Tamil Nadu 632007</li>
           </ul>
         </div>
       </div>

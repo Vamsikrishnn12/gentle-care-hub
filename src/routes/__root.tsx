@@ -11,6 +11,9 @@ import {
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { InitialLoader } from "@/components/InitialLoader";
+import { BookingPopup } from "@/components/BookingPopup";
 
 function NotFoundComponent() {
   return (
@@ -109,9 +112,12 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
+        <InitialLoader />
         <SiteHeader />
         <main className="flex-1"><Outlet /></main>
         <SiteFooter />
+        <BookingPopup />
+        <FloatingWhatsApp />
       </div>
     </QueryClientProvider>
   );

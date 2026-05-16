@@ -164,8 +164,8 @@ export const services: Service[] = [
     title: "Ambulance Service",
     description: "24/7 ambulance support for emergencies and patient transfers.",
     tagline: "Fast, equipped, and always on call.",
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Ambulance ready for emergency patient transport",
+    image: "https://images.pexels.com/photos/6754170/pexels-photo-6754170.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Paramedics loading a patient onto an ambulance stretcher",
     longDescription: [
       "In emergencies and planned transfers, every minute and every detail matters. Our ambulance service supports safe movement from home to hospital, hospital to hospital or hospital to home with trained staff and essential equipment.",
       "The coordinator collects location, patient condition and destination details so the right ambulance support can be arranged quickly and the receiving side can be informed when needed.",
