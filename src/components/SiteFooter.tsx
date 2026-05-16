@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin } from "lucide-react";
 import logo from "@/assets/ctn-logo.png";
 
+const mapsHref = "https://maps.app.goo.gl/jiKyDZm3U3EfHq5C7";
+
 export function SiteFooter() {
   return (
     <footer className="mt-24 bg-brand-soft/40 border-t border-border/60">
@@ -27,9 +29,20 @@ export function SiteFooter() {
         <div>
           <h4 className="font-semibold text-sm uppercase tracking-wider text-brand-deep">Get in Touch</h4>
           <ul className="mt-3 space-y-2 text-sm">
-            <li className="flex items-start gap-2"><Phone className="h-4 w-4 mt-0.5 text-brand" /> 88255 00905 / 94427 56140</li>
+            <li className="flex items-start gap-2">
+              <Phone className="h-4 w-4 mt-0.5 text-brand" />
+              <div className="grid gap-1">
+                <a href="tel:8825500905" className="hover:text-brand">88255 00905</a>
+                <a href="tel:9442756140" className="hover:text-brand">94427 56140</a>
+              </div>
+            </li>
             <li className="flex items-start gap-2"><Mail className="h-4 w-4 mt-0.5 text-brand" /> caretouchnursinghomecare@gmail.com</li>
-            <li className="flex items-start gap-2"><MapPin className="h-5 w-5 mt-0.5 shrink-0 text-brand" /> No 91, KR Complex, Vallimalai Rd, opposite to vinayagar temple, Kumarappan Nagar, KRS Nagar, Katpadi, Vellore, Tamil Nadu 632007</li>
+            <li>
+              <a href={mapsHref} target="_blank" rel="noreferrer" className="flex items-start gap-2 hover:text-brand">
+                <MapPin className="h-5 w-5 mt-0.5 shrink-0 text-brand" />
+                No 91, KR Complex, Vallimalai Rd, opposite to vinayagar temple, Kumarappan Nagar, KRS Nagar, Katpadi, Vellore, Tamil Nadu 632007
+              </a>
+            </li>
           </ul>
         </div>
       </div>

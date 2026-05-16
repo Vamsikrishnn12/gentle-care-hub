@@ -30,12 +30,16 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <a
-          href="tel:8825500905"
-          className="hidden md:inline-flex items-center gap-2 rounded-full bg-gradient-brand text-white px-4 py-2 text-sm font-medium shadow-soft hover:opacity-95 transition"
-        >
-          <Phone className="h-4 w-4" /> 88255 00905 / 94427 56140
-        </a>
+        <div className="hidden md:flex items-center gap-2">
+          <a href="tel:8825500905" className="inline-flex items-center gap-2 rounded-full bg-gradient-brand text-white px-4 py-2 text-sm font-medium shadow-soft hover:shadow-lg transition">
+            <Phone className="h-4 w-4" />
+            88255 00905
+          </a>
+          <a href="tel:9442756140" className="inline-flex items-center gap-2 rounded-full bg-gradient-brand text-white px-4 py-2 text-sm font-medium shadow-soft hover:shadow-lg transition">
+            <Phone className="h-4 w-4" />
+            94427 56140
+          </a>
+        </div>
         <button className="md:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menu">
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -48,9 +52,16 @@ export function SiteHeader() {
                 {n.label}
               </Link>
             ))}
-            <a href="tel:8825500905" className="inline-flex items-center gap-2 rounded-full bg-gradient-brand text-white px-4 py-2 text-sm w-fit">
-              <Phone className="h-4 w-4" /> 88255 00905 / 94427 56140
-            </a>
+            <div className="flex flex-wrap gap-2">
+              <a href="tel:8825500905" className="inline-flex w-fit items-center gap-2 rounded-full bg-gradient-brand text-white px-4 py-2 text-sm">
+                <Phone className="h-4 w-4" />
+                88255 00905
+              </a>
+              <a href="tel:9442756140" className="inline-flex w-fit items-center gap-2 rounded-full bg-gradient-brand text-white px-4 py-2 text-sm">
+                <Phone className="h-4 w-4" />
+                94427 56140
+              </a>
+            </div>
           </div>
         </div>
       )}

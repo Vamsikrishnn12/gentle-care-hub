@@ -6,6 +6,7 @@ import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { services } from "@/lib/services-data";
 
 const whatsappHref = "https://wa.me/918825500905";
+const mapsHref = "https://maps.app.goo.gl/jiKyDZm3U3EfHq5C7";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -54,10 +55,10 @@ function ContactPage() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 grid lg:grid-cols-2 gap-10">
         <div className="space-y-4 animate-fade-up">
           {[
-            { icon: Phone, title: "Phone", lines: ["88255 00905", "94427 56140"], href: "tel:8825500905" },
+            { icon: Phone, title: "Phone", lines: ["88255 00905", "94427 56140"], phoneLinks: ["tel:8825500905", "tel:9442756140"] },
             { icon: WhatsAppIcon, title: "WhatsApp", lines: ["88255 00905"], href: whatsappHref },
             { icon: Mail, title: "Email", lines: ["caretouchnursinghomecare@gmail.com"], href: "mailto:caretouchnursinghomecare@gmail.com" },
-            { icon: MapPin, title: "Address", lines: ["No 91, KR Complex, Vallimalai Rd,", "opposite to vinayagar temple, Kumarappan Nagar,", "KRS Nagar, Katpadi, Vellore, Tamil Nadu 632007"] },
+            { icon: MapPin, title: "Address", lines: ["No 91, KR Complex, Vallimalai Rd,", "opposite to vinayagar temple, Kumarappan Nagar,", "KRS Nagar, Katpadi, Vellore, Tamil Nadu 632007"], href: mapsHref },
             { icon: Clock, title: "Hours", lines: ["Open 24 hours - 7 days a week"] },
           ].map((c) => {
             const Body = (
@@ -67,11 +68,17 @@ function ContactPage() {
                 </div>
                 <div>
                   <div className="font-semibold">{c.title}</div>
-                  {c.lines.map((l) => <div key={l} className="text-sm text-muted-foreground">{l}</div>)}
+                  {"phoneLinks" in c
+                    ? c.lines.map((l, i) => (
+                        <a key={l} href={c.phoneLinks[i]} className="block text-sm text-muted-foreground hover:text-brand">
+                          {l}
+                        </a>
+                      ))
+                    : c.lines.map((l) => <div key={l} className="text-sm text-muted-foreground">{l}</div>)}
                 </div>
               </div>
             );
-            return c.href ? <a key={c.title} href={c.href} target={c.title === "WhatsApp" ? "_blank" : undefined} rel={c.title === "WhatsApp" ? "noreferrer" : undefined} className="block">{Body}</a> : <div key={c.title}>{Body}</div>;
+            return "href" in c ? <a key={c.title} href={c.href} target={c.title === "WhatsApp" || c.title === "Address" ? "_blank" : undefined} rel={c.title === "WhatsApp" || c.title === "Address" ? "noreferrer" : undefined} className="block">{Body}</a> : <div key={c.title}>{Body}</div>;
           })}
         </div>
 

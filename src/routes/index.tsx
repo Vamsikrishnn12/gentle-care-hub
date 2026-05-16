@@ -38,7 +38,12 @@ function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="tel:8825500905" className="inline-flex items-center gap-2 rounded-full bg-gradient-brand text-white px-6 py-3 text-sm font-semibold shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition">
-                <Phone className="h-4 w-4" /> 88255 00905 / 94427 56140
+                <Phone className="h-4 w-4" />
+                88255 00905
+              </a>
+              <a href="tel:9442756140" className="inline-flex items-center gap-2 rounded-full bg-gradient-brand text-white px-6 py-3 text-sm font-semibold shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition">
+                <Phone className="h-4 w-4" />
+                94427 56140
               </a>
               <Link to="/services" className="inline-flex items-center gap-2 rounded-full bg-white border border-border px-6 py-3 text-sm font-semibold text-foreground hover:border-brand transition">
                 Explore Services <ArrowRight className="h-4 w-4" />
@@ -125,7 +130,12 @@ function Home() {
             </div>
             <div className="flex flex-wrap gap-3 md:justify-end">
               <a href="tel:8825500905" className="inline-flex items-center gap-2 rounded-full bg-white text-brand-deep px-6 py-3 text-sm font-semibold hover:bg-white/90 transition">
-                <Phone className="h-4 w-4" /> 88255 00905 / 94427 56140
+                <Phone className="h-4 w-4" />
+                88255 00905
+              </a>
+              <a href="tel:9442756140" className="inline-flex items-center gap-2 rounded-full bg-white text-brand-deep px-6 py-3 text-sm font-semibold hover:bg-white/90 transition">
+                <Phone className="h-4 w-4" />
+                94427 56140
               </a>
               <Link to="/contact" className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/30 text-white px-6 py-3 text-sm font-semibold hover:bg-white/20 transition">
                 Contact Us
