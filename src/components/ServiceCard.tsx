@@ -14,7 +14,8 @@ export function ServiceCard({
 }) {
   return (
     <Link
-      to={`/services/${slug}`}
+      to="/services/$slug"
+      params={{ slug }}
       className="group flex min-h-36 flex-col items-center justify-center gap-4 rounded-lg bg-card p-6 text-center shadow-card border border-border/60 hover:border-brand/40 hover:-translate-y-1 transition-all duration-300 animate-fade-up"
       style={{ animationDelay: `${delay}ms` }}
     >

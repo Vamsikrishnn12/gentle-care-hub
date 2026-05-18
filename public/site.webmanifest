@@ -1,0 +1,17 @@
+{
+  "name": "Care Touch Nursing & Home Care Agency",
+  "short_name": "Care Touch Nursing",
+  "description": "24/7 home nursing, elder care, doctor visits, physiotherapy and ambulance support in Vellore and Katpadi.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

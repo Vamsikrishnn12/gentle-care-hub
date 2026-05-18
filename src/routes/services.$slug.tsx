@@ -9,6 +9,15 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { getService, services, type Service } from "@/lib/services-data";
+import {
+  absoluteUrl,
+  canonicalLink,
+  faqJsonLd,
+  jsonLd,
+  seoMeta,
+  serviceJsonLd,
+  site,
+} from "@/lib/seo";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }): { service: Service } => {
@@ -19,18 +28,50 @@ export const Route = createFileRoute("/services/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.service.title} - Care Touch Nursing` },
-          { name: "description", content: loaderData.service.description },
-          { property: "og:title", content: `${loaderData.service.title} - Care Touch Nursing` },
-          { property: "og:description", content: loaderData.service.description },
+          ...seoMeta({
+            title: `${loaderData.service.title} in Vellore - ${site.shortName}`,
+            description: `${loaderData.service.description} Available in Vellore and Katpadi with 24/7 coordinator support.`,
+            path: `/services/${loaderData.service.slug}`,
+            image: loaderData.service.image,
+            type: "article",
+          }),
+          jsonLd(serviceJsonLd(loaderData.service)),
+          jsonLd(faqJsonLd(loaderData.service)),
+          jsonLd({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: absoluteUrl("/"),
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Services",
+                item: absoluteUrl("/services"),
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: loaderData.service.title,
+                item: absoluteUrl(`/services/${loaderData.service.slug}`),
+              },
+            ],
+          }),
         ]
       : [],
+    links: loaderData ? [canonicalLink(`/services/${loaderData.service.slug}`)] : [],
   }),
   component: ServiceDetail,
   notFoundComponent: () => (
     <div className="mx-auto max-w-3xl px-4 py-24 text-center">
       <h1 className="font-display text-3xl">Service not found</h1>
-      <Link to="/services" className="mt-4 inline-block text-brand">View all services</Link>
+      <Link to="/services" className="mt-4 inline-block text-brand">
+        View all services
+      </Link>
     </div>
   ),
 });
@@ -45,9 +86,13 @@ function ServiceDetail() {
       <section className="bg-gradient-hero">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <nav className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Link to="/" className="hover:text-brand">Home</Link>
+            <Link to="/" className="hover:text-brand">
+              Home
+            </Link>
             <ChevronRight className="h-3 w-3" />
-            <Link to="/services" className="hover:text-brand">Services</Link>
+            <Link to="/services" className="hover:text-brand">
+              Services
+            </Link>
             <ChevronRight className="h-3 w-3" />
             <span className="text-foreground/80">{service.title}</span>
           </nav>
@@ -57,11 +102,16 @@ function ServiceDetail() {
               <div className="h-20 w-20 rounded-2xl bg-white shadow-card flex items-center justify-center text-brand-deep">
                 <Icon className="h-10 w-10" />
               </div>
-              <h1 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl">{service.title}</h1>
+              <h1 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl">
+                {service.title}
+              </h1>
               <p className="mt-3 text-lg text-muted-foreground max-w-2xl">{service.tagline}</p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {service.outcomes.slice(0, 2).map((outcome) => (
-                  <span key={outcome} className="rounded-full bg-white/80 border border-border px-4 py-2 text-xs font-medium text-brand-deep">
+                  <span
+                    key={outcome}
+                    className="rounded-full bg-white/80 border border-border px-4 py-2 text-xs font-medium text-brand-deep"
+                  >
                     {outcome}
                   </span>
                 ))}
@@ -127,7 +177,10 @@ function ServiceDetail() {
             <h2 className="font-display text-2xl">What's included</h2>
             <ul className="mt-5 grid sm:grid-cols-2 gap-3">
               {service.includedDetails.map((h: string) => (
-                <li key={h} className="flex items-start gap-2 rounded-xl border border-border/60 bg-card p-4">
+                <li
+                  key={h}
+                  className="flex items-start gap-2 rounded-xl border border-border/60 bg-card p-4"
+                >
                   <CheckCircle2 className="h-5 w-5 text-leaf shrink-0 mt-0.5" />
                   <span className="text-sm">{h}</span>
                 </li>
@@ -138,7 +191,9 @@ function ServiceDetail() {
           <div className="animate-fade-up">
             <h2 className="font-display text-2xl">Care focus areas</h2>
             <p className="mt-3 text-muted-foreground leading-relaxed">
-              This service is planned around the patient's condition, comfort level and family expectations. Our coordinator explains the visit clearly before booking, so you know what support will be provided and how it helps at home.
+              This service is planned around the patient's condition, comfort level and family
+              expectations. Our coordinator explains the visit clearly before booking, so you know
+              what support will be provided and how it helps at home.
             </p>
             <div className="mt-5 grid sm:grid-cols-2 gap-3">
               {service.highlights.map((item) => (
@@ -161,7 +216,10 @@ function ServiceDetail() {
             </div>
             <ul className="mt-5 grid sm:grid-cols-3 gap-3">
               {service.prepare.map((item) => (
-                <li key={item} className="rounded-xl bg-white/80 border border-border/60 p-4 text-sm text-muted-foreground">
+                <li
+                  key={item}
+                  className="rounded-xl bg-white/80 border border-border/60 p-4 text-sm text-muted-foreground"
+                >
                   {item}
                 </li>
               ))}
@@ -172,7 +230,10 @@ function ServiceDetail() {
             <h2 className="font-display text-2xl">How it works</h2>
             <ol className="mt-5 space-y-4">
               {service.process.map((p: { step: string; detail: string }, i: number) => (
-                <li key={p.step} className="flex gap-4 rounded-xl border border-border/60 bg-card p-5">
+                <li
+                  key={p.step}
+                  className="flex gap-4 rounded-xl border border-border/60 bg-card p-5"
+                >
                   <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-brand text-white text-sm font-semibold flex items-center justify-center">
                     {i + 1}
                   </div>
@@ -189,7 +250,10 @@ function ServiceDetail() {
             <h2 className="font-display text-2xl">Frequently asked</h2>
             <div className="mt-5 space-y-3">
               {service.faqs.map((f: { q: string; a: string }) => (
-                <details key={f.q} className="group rounded-xl border border-border/60 bg-card p-5 open:shadow-card transition">
+                <details
+                  key={f.q}
+                  className="group rounded-xl border border-border/60 bg-card p-5 open:shadow-card transition"
+                >
                   <summary className="cursor-pointer font-medium list-none flex justify-between items-center">
                     {f.q}
                     <ChevronRight className="h-4 w-4 transition-transform group-open:rotate-90 text-brand" />
@@ -204,27 +268,44 @@ function ServiceDetail() {
         <aside className="space-y-6 lg:sticky lg:top-24 self-start">
           <div className="rounded-2xl bg-gradient-brand text-white p-6 shadow-soft">
             <h3 className="font-display text-xl">Book this service</h3>
-            <p className="mt-2 text-sm text-white/90">Talk to our coordinator and we'll arrange care quickly.</p>
+            <p className="mt-2 text-sm text-white/90">
+              Talk to our coordinator and we'll arrange care quickly.
+            </p>
             <div className="mt-4 grid gap-2">
-              <a href="tel:8825500905" className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-brand-deep px-5 py-2.5 text-sm font-semibold hover:bg-white/90 transition">
+              <a
+                href="tel:8825500905"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-brand-deep px-5 py-2.5 text-sm font-semibold hover:bg-white/90 transition"
+              >
                 <Phone className="h-4 w-4" />
                 88255 00905
               </a>
-              <a href="tel:9442756140" className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-brand-deep px-5 py-2.5 text-sm font-semibold hover:bg-white/90 transition">
+              <a
+                href="tel:9442756140"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-brand-deep px-5 py-2.5 text-sm font-semibold hover:bg-white/90 transition"
+              >
                 <Phone className="h-4 w-4" />
                 94427 56140
               </a>
             </div>
-            <Link to="/contact" className="mt-2 block text-center rounded-full bg-white/10 border border-white/30 text-white px-5 py-2.5 text-sm font-semibold hover:bg-white/20 transition">
+            <Link
+              to="/contact"
+              className="mt-2 block text-center rounded-full bg-white/10 border border-white/30 text-white px-5 py-2.5 text-sm font-semibold hover:bg-white/20 transition"
+            >
               Send a message
             </Link>
           </div>
           <div className="overflow-hidden rounded-2xl border border-border/60 bg-card">
-            <img src={service.image} alt={service.imageAlt} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+            <img
+              src={service.image}
+              alt={service.imageAlt}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover"
+            />
             <div className="p-5">
               <h3 className="font-semibold">Care built around your home</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                We plan the visit around the patient's comfort, family instructions and doctor advice.
+                We plan the visit around the patient's comfort, family instructions and doctor
+                advice.
               </p>
             </div>
           </div>
@@ -233,9 +314,20 @@ function ServiceDetail() {
             <ul className="mt-4 space-y-3 text-sm">
               {related.map((r) => (
                 <li key={r.slug}>
-                  <Link to={`/services/${r.slug}`} className="group flex items-center gap-3 rounded-xl border border-border/60 p-2 hover:border-brand/40 hover:bg-brand-soft/30 transition">
-                    <img src={r.image} alt={r.imageAlt} loading="lazy" className="h-14 w-16 rounded-lg object-cover" />
-                    <span className="min-w-0 flex-1 font-medium group-hover:text-brand">{r.title}</span>
+                  <Link
+                    to="/services/$slug"
+                    params={{ slug: r.slug }}
+                    className="group flex items-center gap-3 rounded-xl border border-border/60 p-2 hover:border-brand/40 hover:bg-brand-soft/30 transition"
+                  >
+                    <img
+                      src={r.image}
+                      alt={r.imageAlt}
+                      loading="lazy"
+                      className="h-14 w-16 rounded-lg object-cover"
+                    />
+                    <span className="min-w-0 flex-1 font-medium group-hover:text-brand">
+                      {r.title}
+                    </span>
                     <ChevronRight className="h-4 w-4 shrink-0 text-brand" />
                   </Link>
                 </li>
@@ -246,7 +338,10 @@ function ServiceDetail() {
       </section>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-12">
-        <Link to="/services" className="inline-flex items-center gap-2 text-sm text-brand hover:text-brand-deep">
+        <Link
+          to="/services"
+          className="inline-flex items-center gap-2 text-sm text-brand hover:text-brand-deep"
+        >
           <ArrowLeft className="h-4 w-4" /> Back to all services
         </Link>
       </div>

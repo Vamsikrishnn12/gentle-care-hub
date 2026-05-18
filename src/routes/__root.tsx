@@ -14,6 +14,16 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { InitialLoader } from "@/components/InitialLoader";
 import { BookingPopup } from "@/components/BookingPopup";
+import heroImage from "@/assets/hero-care.jpg";
+import favicon from "@/assets/favicon.ico";
+import {
+  defaultDescription,
+  jsonLd,
+  localBusinessJsonLd,
+  seoMeta,
+  site,
+  websiteJsonLd,
+} from "@/lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -77,14 +87,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Care Touch Nursing & Home Care Agency — Vellore" },
-      { name: "description", content: "Trusted home nursing, doctor visits, physiotherapy, elder care and ambulance services in Vellore. Compassionate care at your doorstep." },
-      { property: "og:title", content: "Care Touch Nursing & Home Care Agency" },
-      { property: "og:description", content: "Compassionate home healthcare in Vellore — nurses, caregivers and doctors at your doorstep." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { name: "theme-color", content: "#0f766e" },
+      ...seoMeta({
+        title: `${site.name} - Home Healthcare in Vellore`,
+        description: defaultDescription,
+        image: heroImage,
+      }),
+      jsonLd(localBusinessJsonLd),
+      jsonLd(websiteJsonLd),
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: favicon },
+      { rel: "shortcut icon", href: "/favicon.ico" },
+      { rel: "manifest", href: "/site.webmanifest" },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -114,7 +131,9 @@ function RootComponent() {
       <div className="flex min-h-screen flex-col">
         <InitialLoader />
         <SiteHeader />
-        <main className="flex-1"><Outlet /></main>
+        <main className="flex-1">
+          <Outlet />
+        </main>
         <SiteFooter />
         <BookingPopup />
         <FloatingWhatsApp />
